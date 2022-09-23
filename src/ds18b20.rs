@@ -42,7 +42,7 @@ impl MeasureResolution {
 }
 
 pub struct DS18B20 {
-    device: Device,
+    pub device: Device,
     resolution: MeasureResolution,
 }
 
