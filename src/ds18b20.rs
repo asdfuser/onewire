@@ -85,7 +85,7 @@ impl DS18B20 {
         wire: &mut OneWire<O>,
         delay: &mut impl DelayUs,
     ) -> Result<MeasureResolution, Error<O::Error>> {
-        wire.reset_select_write_only(delay, &self.device, &[Command::Convert as u8])?;
+        wire.reset_select_write_only(delay, Some(&self.device), &[Command::Convert as u8])?;
         Ok(self.resolution)
     }
 

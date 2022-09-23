@@ -20,6 +20,7 @@ pub const ADDRESS_BITS: u8 = ADDRESS_BYTES * 8;
 #[repr(u8)]
 pub enum Command {
     SelectRom = 0x55,
+    SkipRom = 0xCC,
     SearchNext = 0xF0,
     SearchNextAlarmed = 0xEC,
 }
@@ -297,10 +298,15 @@ impl<E: core::fmt::Debug, ODO: OpenDrainOutput<Error = E>> OneWire<ODO> {
     pub fn reset_select_write_only(
         &mut self,
         delay: &mut impl DelayUs,
+        device: Option<&Device>,
         write: &[u8],
     ) -> Result<(), Error<E>> {
         self.reset(delay)?;
-        self.select(delay, device)?;
+        if let Some(device) = device {
+            self.select(delay, device)?;
+        } else {
+            self.write_command(delay, Command::SkipRom, self.parasite_mode)?;
+        }
         self.write_bytes(delay, write)?;
         Ok(())
     }
