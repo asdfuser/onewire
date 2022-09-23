@@ -41,9 +41,20 @@ impl MeasureResolution {
     }
 }
 
+#[derive(Debug)]
 pub struct DS18B20 {
     pub device: Device,
     resolution: MeasureResolution,
+}
+
+impl core::fmt::Display for DS18B20 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        write!(
+            f,
+            "DS18B20 ({})",
+            self.device
+        )
+    }
 }
 
 impl DS18B20 {
