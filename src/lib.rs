@@ -499,9 +499,9 @@ impl<E: core::fmt::Debug, ODO: OpenDrainOutput<Error = E>> OneWire<ODO> {
         for b in bytes {
             self.write_byte(delay, *b, false)?;
         }
-        if !self.parasite_mode {
-            self.disable_parasite_mode()?;
-        }
+        //if !self.parasite_mode {
+        //    self.disable_parasite_mode()?;
+        //}
         Ok(())
     }
 
@@ -524,9 +524,9 @@ impl<E: core::fmt::Debug, ODO: OpenDrainOutput<Error = E>> OneWire<ODO> {
             self.write_bit(delay, (byte & 0x01) == 0x01)?;
             byte >>= 1;
         }
-        if !parasite_mode {
-            self.disable_parasite_mode()?;
-        }
+        //if !parasite_mode {
+        //    self.disable_parasite_mode()?;
+        //}
         Ok(())
     }
 
