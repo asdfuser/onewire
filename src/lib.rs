@@ -269,6 +269,10 @@ impl<E: core::fmt::Debug, ODO: OpenDrainOutput<Error = E>> OneWire<ODO> {
         }
     }
 
+    pub fn borrow_pin(&mut self) -> &mut ODO {
+        &mut self.output
+    }
+
     pub fn reset_select_write_read(
         &mut self,
         delay: &mut impl DelayUs,
